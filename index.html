@@ -1,0 +1,193 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0,initial-scale=1"/>
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="Font-Awesome-3.2.1/css/font-awesome.min.css"/>
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/index.css">
+        
+        <script>
+
+	        (function (doc, win) {
+				var docEl = doc.documentElement,
+					resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+					recalc = function () {
+
+						var clientWidth = docEl.clientWidth;
+						if (!clientWidth) return;
+						if (clientWidth >= 640) {
+							docEl.style.fontSize = '100px';
+						} else {
+
+							docEl.style.fontSize = 100 * (clientWidth / 640) + 'px';
+						}
+					};
+
+				if (!doc.addEventListener) return;
+				win.addEventListener(resizeEvt, recalc, false);
+				recalc()
+				doc.addEventListener('DOMContentLoaded', recalc, false);
+			})(document, window);
+
+		    function geturl(url) {
+			    var a =  document.createElement('a');
+			    a.href = url;
+			    return {
+			        source: url,
+			        protocol: a.protocol.replace(':',''),
+			        host: a.hostname,
+			        port: a.port,
+			        query: a.search,
+			        params: (function(){
+			            var ret = {},
+			                seg = a.search.replace(/^\?/,'').split('&'),
+			                len = seg.length, i = 0, s;
+			            for (;i<len;i++) {
+			                if (!seg[i]) { continue; }
+			                s = seg[i].split('=');
+			                ret[s[0]] = s[1];
+			            }
+			            return ret;
+			        })(),
+			        file: (a.pathname.match(/\/([^\/?#]+)$/i) || [,''])[1],
+			        hash: a.hash.replace('#',''),
+			        path: a.pathname.replace(/^([^\/])/,'/$1'),
+			        relative: (a.href.match(/tps?:\/\/[^\/]+(.+)/) || [,''])[1],
+			        segments: a.pathname.replace(/^\//,'').split('/')
+			    }
+			}
+
+			var uu = geturl ( window.location.href ).params.id
+          
+			var head = document.getElementsByTagName('head')[0],
+			    linkTag = document.createElement('embed');
+			 
+			linkTag.id = 'dynamic-style';
+			linkTag.setAttribute('autostart','false');
+			linkTag.setAttribute('hidden','ture');
+			 
+			head.appendChild(linkTag);
+
+        </script> 
+
+        <style>
+        	/* -------- 右边菜单 --------- */
+			#menuRight1{
+				margin-top: 1rem;
+				margin-bottom: 1rem;
+				right:-1.4rem;
+				position: absolute;
+				top:50%;
+				transform: translateY(-60%);
+				display: block;
+				width:1.4rem;
+				z-index:999;
+				transition: .4s right;
+			}
+			#menuRight1 ul{
+				display: flex;   
+				justify-content: center;
+				flex-direction: column;       
+				width:auto;
+			}
+			#menuRight1 ul li{        
+				display: block;   
+				width:auto;         
+				cursor: pointer;    
+				font-size:.20rem;   
+				display: block;    
+				margin-right:.05rem;
+				line-height:32px;    
+				height:32px;            
+				overflow:hidden;         
+				text-align:center;       
+				margin-top: .15rem;       
+				border-radius:.08rem;  
+				background-image: linear-gradient(rgba(2, 70, 105, 0.3),rgba(0,0,0,.6));
+				color:#ccc;                                         
+			}
+			#menuRight1 ul li.active{
+                color:#fff;  
+				background: rgba(27,28,30,.2);         
+				background-image: linear-gradient(rgba(2, 70, 105, 0.5),rgba(0,0,0,.6));
+				box-shadow: 0 0 2px rgba(107,107,107,.5)   
+			}
+        </style>
+
+	</head>
+	<body>
+	    <div id='screen1'>
+	    	<div id="webglDiv" ontouchmove="event.preventDefault()">
+	    	<!-- 显示名字 -->
+		    	<div id="showName" style="display: none">
+					<div id="name"></div>
+					<div id="triangle-right"></div>
+			    </div>
+		    </div>
+
+		    <div id="menuLeft">
+				<ul class='partsCon'>
+					<li id="correlation">患者</li>
+					<li id="unusual">菜单</li>
+					<li id="dotTap">透明</li>
+				</ul>
+		    </div>
+
+		    <div id="menuRight1" style="HEIGHT: 70%; OVERFLOW: scroll; overflow-x: hidden; overflow-y: auto;">
+				<ul class='menuList'>
+				</ul>
+	        </div>
+
+	        <div id="menuRight">
+				<ul>
+					<li id="returnIndex"> <span class="icon-user-md"></span></li>
+					<li id="resetCamera"> <span class="icon-screenshot"></span></li>
+					<li id="bgColor"> <span class="icon-picture"></span></li>
+					<li id="help"> <span class="icon-question-sign"></span></li>
+				</ul>
+		    </div>
+
+	        <ul class='systemColor'>
+		    	<li class='active' name="radial-gradient(at center center,#fff 0,#343f4c 100%)"><div style="background: radial-gradient(at center center,#fff 0,#343f4c 100%)"></div></li>
+				<li name="radial-gradient(at center center,rgb(245, 245, 245) 0%,rgb(0, 0, 0) 100%)"><div style="background-image:radial-gradient(at center center,rgb(245, 245, 245) 0%,rgb(0, 0, 0) 100%);"></div></li>
+				<li name="linear-gradient(0deg, #343f4c , #ffffff 45%, #ffffff 40%,#343f4c )"><div style="background-image:linear-gradient(0deg, #343f4c , #ffffff 45%, #ffffff 40%,#343f4c );"></div></li>
+				<li name="#ffffff"><div style="background: #ffffff"></div></li>
+				<li name="black"><div style="background: #000000"></div></li>
+		    </ul>
+
+	    </div>
+
+		<div class='show-popover'>
+			<div class='return icon-remove'></div>
+			<div class="show-contain"></div>
+			<div class="list-contain" >
+			</div>
+		</div>
+
+        <div class='progress-wrap'>
+            <img src="img/tj_logo.png" alt="">
+        	<div class="progress-contain">
+	        	<div class="progress-border">
+				    <div class="progress-inner-bar"></div>
+				</div>
+				<div class='text'></div>
+				<div class='num'></div>
+	        </div> 
+        </div>
+
+        <script src="js/html/jquery.js"></script>                                                                              
+		<script src="js/three.js"></script>                                                 
+		<script src="js/controls/TrackballControls.js"></script>                             
+		<script src="js/Detector.js"></script>                                           
+		<script src="js/loaders/OBJLoader.js"></script>                                     
+		<script src="js/controls/OrbitControls.js"></script>                            
+        <script src="js/loaders/MTLLoader.js"></script>                              
+        <script src="js/detail.js"></script>
+        <script src="js/app.js"></script>                                             
+        <script src="js/index.js"></script>
+		<script src="js/preventTransverse.js"></script>
+	</body>  
+</html>                                                   

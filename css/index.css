@@ -1,0 +1,341 @@
+
+body{
+	font-family:'Helvetica Neue',Helvetica,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',Arial,sans-serif;
+	overflow: hidden;
+	-webkit-overflow-scrolling: touch;
+}
+
+#screen1{
+	position: relative;
+	width: 100%;
+	height:100%;
+	-moz-user-select:none;
+	-webkit-user-select:none;
+	user-select:none;
+}
+
+#webglDiv,#screen1,#myCanvas{
+	position:absolute;
+	left:0;
+	top:0;
+	width:100%;
+	height:100%;
+	overflow:hidden;
+}
+#webglDiv{
+	background: radial-gradient(at center center,#fff 0,#343f4c 100%);
+}
+
+/* -------- 顶部主菜单 --------- */
+#menuRight{
+	position: absolute;
+	left:0;
+	top:.1rem;
+	height:auto;
+	width:5rem;
+	display: flex;
+	justify-content: center;
+	z-index:99999;
+    min-width: 3.2rem;
+    left: 50%;
+    transform:translateX(-50%);
+	-ms-transform:translateX(-50%); 	/* IE 9 */
+	-moz-transform:translateX(-50%); 	/* Firefox */
+	-webkit-transform:translateX(-50%); /* Safari 和 Chrome */
+	-o-transform:translateX(-50%);    	/* Opera */
+
+    background-color: transparent;
+    box-shadow: 0 1px 5px 0 rgba(0,0,0,0);
+    font-size: .26rem;
+    border-radius:.1rem;
+    padding:.05rem 0;
+    padding-right: .5rem;
+}
+#menuRight li{
+	overflow:hidden;
+	height:.55rem;
+	width:.55rem;
+	text-align:center;
+	border-radius:.08rem;     
+	cursor: pointer;
+	float: left;
+	margin-left: .5rem;
+    cursor: pointer;
+    background-color: rgba(2, 70, 105, 0.85);
+    box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.4);
+}
+#menuRight li span{
+	font-size:.4rem;
+	color:#dbdbdb;
+	line-height:.55rem;
+}
+
+
+/* --------- 主菜单分支 ---------- */
+.systemColor{
+	position: absolute;
+	left:0;
+	top:.8rem;
+	width:4.32rem;
+	height:auto;
+	background-color: rgba(2, 70, 105, 0.65);
+    
+	display: flex;
+	justify-content: center;
+	z-index:99999;
+    left: 50%;
+    transform:translateX(-50%);
+	-ms-transform:translateX(-50%); 	/* IE 9 */
+	-moz-transform:translateX(-50%); 	/* Firefox */
+	-webkit-transform:translateX(-50%); /* Safari 和 Chrome */
+	-o-transform:translateX(-50%);    	/* Opera */  
+    border-radius:.08rem;               
+    padding:.05rem 0;     
+    padding-right: .3rem;
+
+}
+.systemColor li{         
+	position: static;        
+	cursor: pointer;      
+	float:left;              
+	width:.5rem;           
+	height:.5rem;            
+	padding:0;
+	margin-left:.3rem;               
+	display: block;               
+}
+.systemColor li div{             
+	width:.5rem;             
+	height:.5rem;              
+	border-radius:.08rem;             
+} 
+
+.systemColor li.active div{             
+	 border: 2px dashed #fffeee !important;
+}  
+                               
+
+
+/* ------- 名字显示 ------*/
+#showName{
+	position: absolute;
+	right:200px;
+	top:400px;
+	z-index: 99;
+	-moz-user-select:none;
+	-webkit-user-select:none;
+	user-select:none;
+}
+#name{
+	width:auto;
+	color:#fff;
+	font-size:16px;
+	border-radius:4px;
+	padding:0 7px 0 7px;
+	height:28px;
+	line-height:28px;
+	background: rgba(46,50,57,.7);
+	-moz-user-select:none;
+	-webkit-user-select:none;
+	user-select:none;
+}
+#triangle-right{
+	position:absolute;
+	right:-30px;
+	top:13px;
+    width: 30px;
+    height: 1px;
+    background: #888;
+    -moz-user-select:none;
+	-webkit-user-select:none;
+	user-select:none;
+}
+
+
+/* -------- di部 功能菜单 --------- */
+#menuLeft{
+	position: absolute;
+	bottom:.08rem;
+	left:0;
+	width:6.4rem;
+	height:auto;
+    display: flex;
+	justify-content: center;
+	z-index:99999;
+    min-width: 3.2rem;
+    left: 50%;
+    transform:translateX(-50%);
+	-ms-transform:translateX(-50%); 	/* IE 9 */
+	-moz-transform:translateX(-50%); 	/* Firefox */
+	-webkit-transform:translateX(-50%); /* Safari 和 Chrome */
+	-o-transform:translateX(-50%);    	/* Opera */
+    padding:.05rem 0;
+}
+#menuLeft li{
+	overflow:hidden;
+	cursor: pointer;
+	padding:.12rem;
+	margin-left: .35rem;
+	float: left;
+	font-size: .24rem;
+	color:#f1f1f1;
+	border-radius: .08rem;
+	text-align: center;
+	background-color: rgba(2, 70, 105, 0.85);
+    box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.4);
+}
+
+#menuLeft li.active {
+	/*border:2px #f1f1f1 dashed !important;*/
+	color: #ffffff;
+	background: rgba(174, 211, 229, 0.2);
+}
+
+/*   患者信息   */
+.show-popover{
+	display: none;
+	position: fixed;
+	top:0;
+	left: 50%;
+	bottom: 0;
+	background: #111;
+	width:6.4rem;
+	margin-left: -3.2rem;
+	z-index: 99999999;
+}
+.show-popover .return{
+	position: absolute;
+	bottom:.2rem;
+	left:50%;
+	height:.6rem;
+	width: .6rem;
+	margin-left: -.3rem;
+	line-height: .4rem;
+	color:#fff;
+	border-radius: .1rem;
+	font-size: .4rem;
+	cursor: pointer;
+	z-index: 999;
+	text-align: center;
+	background: rgba(0,0,0,.5);
+	padding:.1rem;
+}
+
+.show-popover .show-contain{
+	position: absolute;
+	top:2rem;
+	left:0;
+	width:100%;
+	background: #111;
+	padding:.1rem;
+}
+.show-popover .show-contain img{
+	width:100%;
+	height: auto;
+}
+
+.list-contain{
+	position: absolute;
+	bottom:0;
+	left: 0;
+	top: 0;
+	width:100%;
+	padding:.1rem;
+	color:#ccc;
+	font-weight: normal;
+	font-size: .26rem;
+	overflow-y: auto;
+}
+
+.list-contain p{
+	color:#ccc;
+	text-indent: .2rem;
+}
+
+.list-contain h2{
+	color: #fff;
+	line-height: .5rem;
+	font-size: .3rem;
+	text-indent: .2rem;
+}
+
+.list-contain span{
+	font-size: .22rem;
+	font-weight: bold;
+	color:#fff;
+}
+
+.list-contain img{
+	width:100%;
+	height:auto;
+}
+
+
+/* --------- 进度条 --------- */
+.progress-wrap{
+	position: fixed;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	background:black;
+	z-index: 9999999999999;
+}
+.progress-wrap img{
+	position: absolute;
+	left:50%;
+	top:50%;
+	width:6.4rem;
+	height:5rem;
+	margin-top: -4rem;
+	margin-left: -3.2rem;
+	background:black;
+}
+.progress-contain{
+	position: absolute;
+	top:50%;
+	left:50%;
+	margin-top: 3rem;
+	margin-left: -2.55rem;
+	height:auto;
+	width:5rem;
+	height:auto;
+	background: rgba(0,0,0,0.5);
+}
+.progress-contain .num{
+	position: absolute;
+	/*left:50%;*/
+	width:100%;
+	bottom: -.3rem;
+	line-height:.3rem;
+	/*margin-right: 0rem;*/
+	font-size: .18rem;
+	color: #fcfff6;
+	text-align: right;
+}
+.progress-contain .text{
+	position: absolute;
+	/*left:50%;*/
+	width:100%;
+	bottom: -.3rem;
+	line-height:.3rem;
+	margin-left: 0rem;
+	font-size: .18rem;
+	color: #fcfff6;
+	text-align: left;
+}
+.progress-contain .progress-border{
+    width:100%;
+    height:.2rem;
+    padding:.04rem;
+    border: 1px solid #555;
+	border-radius: .05rem;
+}
+.progress-contain  .progress-border .progress-inner-bar{
+    background: #24a6f6;
+    height:100%;
+    width:0%;
+    transition: width 0.1s;
+    border-radius: .02rem;
+}
+
