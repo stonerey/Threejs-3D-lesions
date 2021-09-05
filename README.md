@@ -4,7 +4,7 @@
 
 ## 介绍
 使用[Threejs](https://threejs.org/)实现在网页显示3D病灶
-#### Video: https://youtu.be
+#### Video: https://youtu.be/vf9M7JMSk0M
 
 
 #### 截图
